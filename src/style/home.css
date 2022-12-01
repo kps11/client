@@ -1,0 +1,59 @@
+.homepage-container{
+    display: flex;
+    justify-content: space-between;
+    background-color: lightslategray;
+    height: 100%;
+    width: 100%;
+}
+
+.left-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+    background-color: lightgray;
+    
+
+}
+
+.right-body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid #fff;
+  width: 50%;
+  background-color: lightgray;
+  /* background-size: cover; */
+  /* background-image: url("https://cdn.dribbble.com/users/2053153/screenshots/14045825/media/97af5dff04d40210e8be36ae83db5d54.jpg?compress=1&resize=1000x750&vertical=top"); */
+}
+
+.game-logo{
+  height: 30vh;
+  width: 50%;
+}
+.App-logo {
+    height: 30vmin;
+    pointer-events: none;
+  }
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+
+
+
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+
+
+
+

@@ -1,0 +1,6 @@
+.body-container{
+    display: flex;
+    height: 75vh;
+    align-items: center;
+    justify-content: center;
+}

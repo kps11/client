@@ -1,0 +1,15 @@
+.loginContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 40%;
+    border: 1px solid lightseagreen;
+    padding: 2em;
+    border-radius: 1em;
+    width: 33%;
+}
+
+.signUpContainer {
+    height: 80%;
+    width: 35%;
+}

@@ -1,0 +1,36 @@
+.inputComponent{
+    border-radius: 10em;
+    border: 1px solid lightblue;
+    height: 3em;
+    width: 70%;
+    padding-left: 2em;
+    font-size: 16px;
+}
+
+.inputContainer{
+    display: flex;
+    align-items: center;
+}
+
+.labelContainer{
+    width: 20%;
+}
+
+.selectContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    appearance: none;
+    
+}
+
+.errorMessage{
+    color: red;
+    font-size: 14px;
+    align-self: center;
+}
+
+select > option{
+    background-color: aqua;
+}
