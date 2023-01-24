@@ -1,11 +1,12 @@
 import { Switch ,Route , useHistory} from 'react-router-dom'
 import { Login ,Dashboard ,Home ,Default,SignUp } from "./pages"
 import { Header ,Footer } from './component'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import setAuthToken from './utils/setAuthToken'
 import { loadUser} from "./action/loginAction"
 import store from './store'
 import './style/App.css'
+import PrivateRoute from './component/route/PrivateRoute'
 
 
 
@@ -38,17 +39,20 @@ function App() {
   const onClickSignUp =() =>{
     history.push('/signup')
   }
+
   return (
     <>
       <Header onClickSignIn={onClickSignIn} onClickSignUp ={onClickSignUp}/>
       <div className='body-container'>
-      <Switch>
-        <Route path="/" exact={true} component={Home} />
-        <Route  path='/login' component={Login}  />
-        <Route path= '/signup' component = {SignUp} />
-        <Route path='/dashboard' component = {Dashboard} />
-        <Route path = '/logout' component ={Default} /> 
-      </Switch>
+        <Switch>
+          <Route path="/" exact={true} component={Home} />
+          <Route  path='/login' component={Login}  />
+          <Route path= '/signup' component = {SignUp} />
+          <PrivateRoute path='/dashboard'>
+              <Dashboard/>
+            </PrivateRoute> 
+          <Route path = '/logout' component ={Default} /> 
+        </Switch>
       </div>
       <Footer/>
     </>

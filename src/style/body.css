@@ -13,3 +13,137 @@
     height: 80%;
     width: 35%;
 }
+
+.dashboardContainer{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.navContainer{
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    background-color: cadetblue;
+    min-width :15%;
+    height: 100%;
+    justify-content: space-around;
+}
+
+.displayContainer{
+    width: 85%;
+    overflow-y: scroll;
+
+}
+
+.itemContainer{
+    height:1rem;
+    padding: 1rem;
+    color: antiquewhite;
+    text-align: left;
+}
+
+.selected {
+    background-color: #fff;
+    color: #000;
+}
+
+span:hover{
+    background-color: #fff;
+    z-index: 1;
+    box-shadow: 2rem;
+    color: #000;
+}
+
+.grvatar {
+    height : 3em ;
+    width: 3em ;
+    border-radius: 1.5em;
+    border: "1px solid black";
+    margin: 1em;
+}
+
+
+.profileContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.profileItem {
+    display: flex;
+    height: 15em;
+    width: 25em;
+    border: 1px solid #000;
+    margin : 2em;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 5px 5px grey;
+}
+
+.employeesCoantainer {
+    display: flex;
+    padding: 1.5em;
+    flex-direction: column;
+}
+
+.employeeItem{
+    display: flex;
+    border: 1px solid #000;
+    justify-content:space-between;
+    align-items: center;
+    padding: 2rem;
+    height :0.3rem;
+    margin-bottom: 1rem;
+}
+
+/* .empDetail{
+    display: flex;
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+} */
+
+.modalContainer{
+    display: flex;
+    position: fixed;
+    left: 15%;  
+    flex-direction: column;
+    z-index: 1;
+    height:75vh;
+    width: 85%;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    background-color: darkgray;
+    opacity: 0.5;
+
+}
+
+.modal { 
+    display: flex;
+    flex-direction: column;
+    background-color: cadetblue;
+    border: 1px solid #000;
+    min-height: 10em;
+    width: 25em;
+    color: darkblue;
+
+
+}
+
+.modalCloseButton{
+    height: 2em;
+    width: 2em;
+    color: #fff;
+    background-color: #000;
+    align-self: flex-end;
+}
+
+.modalBody{
+    display: flex;
+    padding: 2em;
+    flex-wrap: wrap;
+    
+}
+

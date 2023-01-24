@@ -22,6 +22,8 @@
 }
 
 .applogo{
-    height: 10em;
-    width: 10em;
+    height: 4em;
+    width: 4em;
+    border-radius: 2em;
+    padding: 0.5em;
 }
