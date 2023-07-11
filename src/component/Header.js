@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 
 function Header(props) {
-    const { onClickSignIn ,onClickSignUp } = props
+    const { onClickSignIn ,onClickSignUp ,onClickLogout } = props
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
     return (
         <div className='container'>
@@ -16,7 +16,7 @@ function Header(props) {
             <div className='right-view'>
                { !isAuthenticated ? <> <Button name= "SignIn" onClick = {onClickSignIn}/>
                 <Button name= "SignUp" onClick = {onClickSignUp}/></> : 
-                null}
+                <Button name="Logout" onClick ={onClickLogout}/>}
 
             </div>
         </div>

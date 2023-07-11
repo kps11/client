@@ -1,4 +1,4 @@
-import { LOGIN_SUCESS, LOGIN_FAILURE , SIGNUP_SUCESS ,SIGNUP_FAILURE, USER_LOADED} from "./actionTypes"
+import { LOGIN_SUCESS, LOGIN_FAILURE , SIGNUP_SUCESS ,SIGNUP_FAILURE, USER_LOADED , LOGOUT_USER} from "./actionTypes"
 import api from "../utils/api"
 import setAuthToken from "../utils/setAuthToken";
 
@@ -44,11 +44,11 @@ export const login = (email,password) => async (dispatch) => {
 export const signup = (formData) => async (dispatch) =>{
     try{
         const res = await api.post('/user', formData)
-
         dispatch({
             type : SIGNUP_SUCESS,
-            payload: res.data
+            payload: res.data.payload.user
         })
+        setAuthToken(res.data.token)
 
     }catch(err){
         const errors  = err.response.data.errors;
@@ -59,5 +59,16 @@ export const signup = (formData) => async (dispatch) =>{
         dispatch({
             type:SIGNUP_FAILURE,
         })
+    }
+}
+
+
+export const logoutUser = () => async (dispatch) =>{
+    try{
+        dispatch({
+            type: LOGOUT_USER
+        })
+    }catch(err){
+        console.log('Error in log out')
     }
 }

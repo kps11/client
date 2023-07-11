@@ -29,8 +29,7 @@ function Login() {
 
     useEffect(() =>{
         if(isAuthenticated){
-            console.log("authenticated");
-        history.push("/dashboard")
+            history.push("/dashboard")
              
         }
     })

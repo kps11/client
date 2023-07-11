@@ -1,4 +1,4 @@
-import { LOGIN_SUCESS , LOGIN_FAILURE , SIGNUP_FAILURE , SIGNUP_SUCESS ,USER_LOADED} from "../action/actionTypes";
+import { LOGIN_SUCESS , LOGIN_FAILURE , SIGNUP_FAILURE , SIGNUP_SUCESS ,USER_LOADED, LOGOUT_USER} from "../action/actionTypes";
 
 const initalState ={
     isAuthenticated:false,
@@ -45,7 +45,15 @@ const authReducer = ( state = initalState ,action) => {
                 isAuthenticated:false,
                 isLoading:false,
                 error:action.payload
-            }       
+            } 
+        case LOGOUT_USER:
+            return{
+                isAuthenticated:false,
+                isLoading:false,
+                userDetails:{},
+                error:{},
+                token:localStorage.removeItem('token')
+            }          
          default:
              return state   
     }

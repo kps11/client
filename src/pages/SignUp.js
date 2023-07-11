@@ -1,13 +1,15 @@
-import React ,{useState}from 'react';
+import React ,{useEffect, useState }from 'react';
+import { useHistory} from 'react-router-dom';
 import { Input ,Button ,Select } from '../component';
 import { genders , roles } from "../config.js";
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector} from 'react-redux';
 import { signup } from '../action';
 import FormValidator from "../customeHook/formValidator"
 
 import "../style/body.css"
 
 function SignUp(props) {
+    const history = useHistory()
     const dispatch = useDispatch()
     const [name , setName] =useState("")
     const [email, setEmail] = useState("")
@@ -17,6 +19,7 @@ function SignUp(props) {
     const [ gender , setGender ] = useState("")
     const [clicked , setClicked] = useState(false)
     const { errors , isValid } = FormValidator({ email, password , confirmPassword ,clicked})
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
 
     const { emailError , passwordError , confirmPasswordError} = errors
     const onChange = (type , event) =>{
@@ -36,6 +39,12 @@ function SignUp(props) {
             setGender(value)
         }
     } 
+
+    useEffect(() =>{
+            if(isAuthenticated){
+                history.push('/dashboard')
+            }
+    })
 
     const onClick = (e) =>{
         e.preventDefault()

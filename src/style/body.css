@@ -123,13 +123,10 @@ span:hover{
 .modal { 
     display: flex;
     flex-direction: column;
-    background-color: cadetblue;
     border: 1px solid #000;
     min-height: 10em;
-    width: 25em;
     color: darkblue;
-
-
+    justify-content: center;
 }
 
 .modalCloseButton{
@@ -142,7 +139,7 @@ span:hover{
 
 .modalBody{
     display: flex;
-    padding: 2em;
+    padding: 0.5em;
     flex-wrap: wrap;
     
 }

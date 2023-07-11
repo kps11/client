@@ -42,7 +42,6 @@ export const fetchEmployeeDetails = ( email ) => async (dispatch) =>{
 
 export const updateEmployeeDetails = (data) =>  async (dispatch) =>{
     try {
-        console.log("data ", data)
         const res = await api.put('/employees/profile/', data)
         dispatch({
             type: UPDATE_EMPLOYEE_DETAILS_SUCCESS,

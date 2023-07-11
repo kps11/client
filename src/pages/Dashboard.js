@@ -1,15 +1,18 @@
 import React, { useEffect ,useState } from 'react';
-import Profile from './Profile';
-import Employee from './Employee';
+import { Profile , Employee , Menu } from "./";
 import Modal from '../component/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEmployees ,fetchEmployeeDetails , updateEmployeeDetails} from '../action/employeeAction';
+import { fetchMenu , addMenuItem , updateItem, deleteItem } from '../action/menuAction';
 import "../style/body.css"
 
 function Dashboard(props) {
-    const empData = useSelector(state => state.employee.employeeDetails)
+  const empData = useSelector(state => state.employee.employeeDetails)
+  const  menuLoader  =  useSelector(state => state.menu.menuLoader)
+  const   itemList  =  useSelector(state => state.menu.menuList)
   const [ item , setItem] = useState("")
   const [ openModal , setOpenModal] = useState(false);
+  const [ updateItemList ,  setUpdateItemList ] = useState(false)
   const [ role , setRole] = useState()
   const dispatch = useDispatch();
 
@@ -19,15 +22,34 @@ function Dashboard(props) {
     setItem(value)
   }
 
-  useEffect(() =>{
-       if( item == "Employee" )  {
+    useEffect(() =>{
+        if( item == "Employee" )  {
             dispatch(fetchEmployees())
-       }
-  },[item])
+        }else if( item == "Menu") {
+            dispatch(fetchMenu())
+        }
+    },[item])
 
-  useEffect( () =>{
-    setEmployeeDetails(empData)
-  },[empData])
+    useEffect( () =>{
+        setEmployeeDetails(empData)
+    },[empData])
+
+    //menu item
+    useEffect( () =>{
+        setUpdateItemList(!updateItemList)
+        fetchMenu()
+    },[itemList])
+
+    const onsubmitMenuItem =( data , id ="") =>{
+
+        if( id .length >0){
+            dispatch(updateItem(data, id))
+        }else{
+            dispatch(addMenuItem(data))
+        }
+
+    }
+
 
     const onClickEdit = (email) =>{
         dispatch(fetchEmployeeDetails(email))
@@ -41,7 +63,6 @@ function Dashboard(props) {
             [field] : e.target.value
         })
 
-        console.log("employeedetails", employeeDetails)
     }
     const onClickClose = () =>{
         setOpenModal(false)
@@ -51,6 +72,9 @@ function Dashboard(props) {
         dispatch( updateEmployeeDetails(employeeDetails))
         setOpenModal(false)
     }
+
+
+
     return (
         <div className='dashboardContainer'>
             <div className='navContainer'>
@@ -71,7 +95,10 @@ function Dashboard(props) {
                     item == 'Profile' ? 
                         <Profile/>:
                     item == "Employee" ?
-                        <Employee openModal={openModal} onClickEdit={onClickEdit}  onClickClose={onClickClose}/>:<></>    
+                        <Employee openModal={openModal} onClickEdit={onClickEdit}  onClickClose={onClickClose}/>:
+                    item == "Menu" ?
+                        <Menu itemList={itemList} onsubmitMenuItem={onsubmitMenuItem} updateItemList={updateItemList} menuLoader={menuLoader}/> :    
+                        <></>    
                     
                 }
                 

@@ -1,5 +1,4 @@
 export const emailValidator = (email) => {
-    console.log(new RegExp(/\S+@\S+\.\S+/).test(email) ," email valid")
     if (!email) {
       return "Email is required";
     } else if (! new RegExp(/\S+@\S+\.\S+/).test(email)) {

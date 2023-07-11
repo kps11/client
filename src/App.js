@@ -1,9 +1,10 @@
 import { Switch ,Route , useHistory} from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { Login ,Dashboard ,Home ,Default,SignUp } from "./pages"
 import { Header ,Footer } from './component'
 import { useEffect, useState } from 'react'
 import setAuthToken from './utils/setAuthToken'
-import { loadUser} from "./action/loginAction"
+import { loadUser , logoutUser} from "./action/loginAction"
 import store from './store'
 import './style/App.css'
 import PrivateRoute from './component/route/PrivateRoute'
@@ -12,6 +13,8 @@ import PrivateRoute from './component/route/PrivateRoute'
 
 function App() {
   var history = useHistory() ;
+  const dispatch = useDispatch();
+
 
   useEffect(() => {
     // check for token in LS when app first runs
@@ -40,9 +43,16 @@ function App() {
     history.push('/signup')
   }
 
+  const onClickLogout =() =>{
+    history.push('/login')
+    dispatch(logoutUser())
+
+
+  }
+
   return (
     <>
-      <Header onClickSignIn={onClickSignIn} onClickSignUp ={onClickSignUp}/>
+      <Header onClickSignIn={onClickSignIn} onClickSignUp ={onClickSignUp} onClickLogout={onClickLogout}/>
       <div className='body-container'>
         <Switch>
           <Route path="/" exact={true} component={Home} />
