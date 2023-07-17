@@ -7,6 +7,9 @@ import Menu from "./Menu";
 import Profile from "./Profile";
 import Employee from "./Employee";
 import AddItemMenu from "./AddMenuItem";
+import Material from "./Material";
+import AddMaterial from "./AddMaterial";
+
 
 
 export {
@@ -18,5 +21,7 @@ export {
     Menu,
     Profile,
     Employee,
-    AddItemMenu
+    AddItemMenu,
+    Material,
+    AddMaterial
 }

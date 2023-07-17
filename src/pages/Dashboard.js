@@ -1,15 +1,17 @@
 import React, { useEffect ,useState } from 'react';
-import { Profile , Employee , Menu } from "./";
+import { Profile , Employee , Menu , Material} from "./";
 import Modal from '../component/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEmployees ,fetchEmployeeDetails , updateEmployeeDetails} from '../action/employeeAction';
 import { fetchMenu , addMenuItem , updateItem, deleteItem } from '../action/menuAction';
+import { fetchMaterialList } from "../action/materialAction"
 import "../style/body.css"
 
 function Dashboard(props) {
   const empData = useSelector(state => state.employee.employeeDetails)
   const  menuLoader  =  useSelector(state => state.menu.menuLoader)
-  const   itemList  =  useSelector(state => state.menu.menuList)
+  const  itemList  =  useSelector(state => state.menu.menuList)
+  const  materialList = useSelector(state => state.material.materials)
   const [ item , setItem] = useState("")
   const [ openModal , setOpenModal] = useState(false);
   const [ updateItemList ,  setUpdateItemList ] = useState(false)
@@ -27,7 +29,10 @@ function Dashboard(props) {
             dispatch(fetchEmployees())
         }else if( item == "Menu") {
             dispatch(fetchMenu())
-        }
+        }else if( item == "Material") {
+            dispatch(fetchMaterialList())
+        }   
+
     },[item])
 
     useEffect( () =>{
@@ -98,7 +103,10 @@ function Dashboard(props) {
                         <Employee openModal={openModal} onClickEdit={onClickEdit}  onClickClose={onClickClose}/>:
                     item == "Menu" ?
                         <Menu itemList={itemList} onsubmitMenuItem={onsubmitMenuItem} updateItemList={updateItemList} menuLoader={menuLoader}/> :    
-                        <></>    
+                    item == "Material" ?
+                        <Material materialList={materialList}/>    :
+                        <></>  
+                          
                     
                 }
                 

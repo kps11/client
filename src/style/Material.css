@@ -1,0 +1,46 @@
+.materialContainer{
+    display: flex;
+    flex-direction: column;
+    width: 93%;
+    padding: 1em;
+    margin: 0.2em;
+}
+
+.materialContainer .header{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+
+}
+
+.materialContainer .body {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5em;
+    margin: 3em;
+    justify-content: space-around;
+}
+
+.addItemCaontainer{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.addItemCaontainer .buttonContainer {
+    align-self: flex-end;
+}
+
+
+.materialListBox{
+    display: flex;
+    height: 3em;
+    width: 7em;
+    border: 1px solid #000;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5rem;
+    margin: 1.5rem;
+
+}

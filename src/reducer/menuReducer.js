@@ -63,7 +63,6 @@ const menuReducer = ( state = initialState , action) =>{
                 }
                 return item;
             })
-            console.log("reducer" , menuList )
             return {
                 ...state,
                 menuLoader:false,
