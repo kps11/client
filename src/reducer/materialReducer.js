@@ -4,6 +4,8 @@ import {
     FETCH_MATERIAL_FAILURE,
     ADD_MATERIAL_SUCCESS,
     ADD_MATERIAL_FAILURE,
+    DELETE_MATERIAL_ITEM_SUCCESS,
+    DELETE_MATERIAL_ITEM_FAILURE,
 
 } from "../action/actionTypes";
 
@@ -46,6 +48,17 @@ const materialReducer = (state = initialState , action) =>{
                 ...state,
                 errorMesage:"Error adding new Material"
             }
+        case DELETE_MATERIAL_ITEM_SUCCESS:
+            return {
+                ...state,
+                materials: state.materials.filter(material => material._id != action.payload._id)
+            }
+        case DELETE_MATERIAL_ITEM_FAILURE:
+            return{
+                ...state,
+                errorMessage :  action.payload
+
+            }        
         default:
             return {
                 ...state

@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import {  useDispatch } from 'react-redux';
 import { Button ,Modal} from "../component";
 import  AddMaterial from "./AddMaterial";
-import { fetchMaterialList , addMaterialToList } from "../action/materialAction";
+import {  addMaterialToList , deleteMaterialItem } from "../action/materialAction";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 
 import "../style/Material.css"
@@ -38,6 +40,10 @@ function Material (props){
         dispatch(addMaterialToList(data))
         setOpenModal(false)
     }
+
+    const onClickDelete = ( id ) =>{
+        dispatch(deleteMaterialItem(id))
+    }
     return(
         <div className="materialContainer">
             <div className="header">
@@ -48,7 +54,8 @@ function Material (props){
                     materialList && materialList.map(materialItem =>{
                         return(
                             <div className="materialListBox" key={materialItem._id}>
-                                { materialItem.name }
+                                <span className="materialItemName"> { materialItem.name } </span>
+                                <FontAwesomeIcon icon={faXmark} onClick={() => onClickDelete(materialItem._id)}/>
                             </div>
                         )
                     })

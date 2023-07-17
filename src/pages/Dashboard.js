@@ -15,6 +15,7 @@ function Dashboard(props) {
   const [ item , setItem] = useState("")
   const [ openModal , setOpenModal] = useState(false);
   const [ updateItemList ,  setUpdateItemList ] = useState(false)
+//   const [ updateMateralList , setUpdateMaterialList] = useState(false)
   const [ role , setRole] = useState()
   const dispatch = useDispatch();
 
@@ -38,6 +39,12 @@ function Dashboard(props) {
     useEffect( () =>{
         setEmployeeDetails(empData)
     },[empData])
+
+    useEffect( () =>{
+        // setUpdateMaterialList(!updateMateralList)
+        fetchMaterialList()
+    }, [materialList])
+     
 
     //menu item
     useEffect( () =>{
@@ -104,7 +111,11 @@ function Dashboard(props) {
                     item == "Menu" ?
                         <Menu itemList={itemList} onsubmitMenuItem={onsubmitMenuItem} updateItemList={updateItemList} menuLoader={menuLoader}/> :    
                     item == "Material" ?
-                        <Material materialList={materialList}/>    :
+                        <Material materialList={materialList} 
+                        // updateMateralList={updateMateralList}
+                        
+                        />
+                            :
                         <></>  
                           
                     
