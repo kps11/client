@@ -1,0 +1,43 @@
+.partnerConatner{
+    margin-top: 5px;
+}
+
+.partnerConatner .header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 95%;
+}
+
+.partnerConatner .body {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    padding: 2rem;
+}
+
+.addpartnerContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.selectContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* background-color: aqua; */
+    width: 100%;
+}
+
+.selectLabel{
+    width: 18%;
+    font-size: 18px;
+    /* background-color: blue; */
+    padding: 1rem;
+}
+
+
+
+
+

@@ -9,6 +9,9 @@ import Employee from "./Employee";
 import AddItemMenu from "./AddMenuItem";
 import Material from "./Material";
 import AddMaterial from "./AddMaterial";
+import Partner from "./Partner";
+import AddPartner from "./AddPartner";
+
 
 
 
@@ -23,5 +26,7 @@ export {
     Employee,
     AddItemMenu,
     Material,
-    AddMaterial
+    AddMaterial,
+    Partner,
+    AddPartner
 }

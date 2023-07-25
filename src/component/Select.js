@@ -3,7 +3,7 @@ import "../style/input.css"
 
 
 function Select(props) {
-    const { style ,value ,label ,labelStyle ,placeholder ,onChange , options } = props
+    const { style ,value ,label ,labelStyle ,placeholder ,onChange , options ,multiple} = props
     return (
         <div className='inputContainer'>
         <label  className='labelContainer' style={labelStyle } >{label} :</label> 
@@ -11,8 +11,9 @@ function Select(props) {
                 className = 'inputComponent selectContainer' 
                 style={style} 
                 value={value} 
+                multiple={multiple}
                 onChange={onChange}>
-                <option selected disabled>Select your {label} </option>
+                <option value="" selected disabled hidden>Select your {label} </option>
                 {options.map((element) => {
                     return (
                         <option 

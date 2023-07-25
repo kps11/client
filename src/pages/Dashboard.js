@@ -1,10 +1,11 @@
 import React, { useEffect ,useState } from 'react';
-import { Profile , Employee , Menu , Material} from "./";
+import { Profile , Employee , Menu , Material , Partner} from "./";
 import Modal from '../component/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEmployees ,fetchEmployeeDetails , updateEmployeeDetails} from '../action/employeeAction';
 import { fetchMenu , addMenuItem , updateItem, deleteItem } from '../action/menuAction';
 import { fetchMaterialList } from "../action/materialAction"
+import { fetchPartner } from '../action/partnerAction';
 import "../style/body.css"
 
 function Dashboard(props) {
@@ -12,6 +13,8 @@ function Dashboard(props) {
   const  menuLoader  =  useSelector(state => state.menu.menuLoader)
   const  itemList  =  useSelector(state => state.menu.menuList)
   const  materialList = useSelector(state => state.material.materials)
+  const partnerList = useSelector(state => state.partner.partners)
+
   const [ item , setItem] = useState("")
   const [ openModal , setOpenModal] = useState(false);
   const [ updateItemList ,  setUpdateItemList ] = useState(false)
@@ -32,7 +35,10 @@ function Dashboard(props) {
             dispatch(fetchMenu())
         }else if( item == "Material") {
             dispatch(fetchMaterialList())
-        }   
+        }else if ( item == "Partner"){
+            dispatch(fetchPartner())
+            dispatch(fetchMaterialList())
+        }
 
     },[item])
 
@@ -44,6 +50,10 @@ function Dashboard(props) {
         // setUpdateMaterialList(!updateMateralList)
         fetchMaterialList()
     }, [materialList])
+
+    useEffect(() =>{
+        fetchPartner()
+    },[partnerList])
      
 
     //menu item
@@ -99,7 +109,7 @@ function Dashboard(props) {
                     <span className={ item == "Employee" ? "itemContainer selected":"itemContainer"} onClick={()=>onClickItem('Employee')}>Employee</span>
                     <span className={ item == "Material" ? "itemContainer selected":"itemContainer"} onClick={()=>onClickItem('Material')}>Material</span>
                     <span className={ item == "Revenue" ? "itemContainer selected":"itemContainer"} onClick={()=>onClickItem('Revenue')}>Revenue</span>
-                    <span className={ item == "Customer Review" ? "itemContainer selected":"itemContainer"} onClick={()=>onClickItem('Customer Review')}>Customer Review</span>
+                    <span className={ item == "Partner" ? "itemContainer selected":"itemContainer"} onClick={()=>onClickItem('Partner')}>Partners</span>
                     <span className={ item == "Settings" ? "itemContainer selected":"itemContainer"} onClick={()=>onClickItem('Settings')}>Settings</span>
             </div>
             <div className='displayContainer'>
@@ -114,8 +124,15 @@ function Dashboard(props) {
                         <Material materialList={materialList} 
                         // updateMateralList={updateMateralList}
                         
+                        />:
+                    item == "Partner" ?
+                        <Partner
+                            partnerList={partnerList}
+                            materialList={materialList} 
+
                         />
-                            :
+                        
+                        :
                         <></>  
                           
                     
