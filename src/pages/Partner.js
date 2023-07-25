@@ -1,24 +1,24 @@
-import React , { useEffect, useState }from "react";
+import React , { useState }from "react";
 import { Button , Modal} from "../component";
 import { AddPartner } from "./index";
-import { useSelector , useDispatch} from "react-redux";
-import { fetchMaterialList } from "../action/materialAction";
-import { addPartner } from "../action/partnerAction";
+import { useDispatch} from "react-redux";
+import { addPartner , updatePartner , fetchPartner } from "../action/partnerAction";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash ,faPen } from '@fortawesome/free-solid-svg-icons';
 import "../style/Partner.css"
 
 
 function Partner (props) {
-    const { partnerList , materialList } = props
-    // const materialList = useSelector(state =>  state.material.materials)
+    const { partnerList , materialList , onClickDeletePartner} = props
     const dispatch = useDispatch()
     const [ modal , setModal ] = useState(false)
-
-    // useEffect(() =>{
-    //     dispatch(fetchMaterialList())
-    // },[])
+    const [ partnerDetails , setPartnerDetails ] = useState({})
+    const [ selectPartnerId , setSelectpartnerId ] = useState('')
 
     const modalCustomeStyle = {
         position: "absolute",
+        opacity:1,
+        backgroundColor:"lightgrey",
         zIndex: 1,
         width:"50%",
         left:"30%",
@@ -26,12 +26,40 @@ function Partner (props) {
 
     const onClickAddPartner = () =>{
         setModal(true);
+        setPartnerDetails({})
+        setSelectpartnerId("")
     }
 
-  useEffect(()=>{
-    console.log("partnerList",partnerList)
+    const onClickDelete = (id) =>{
+        onClickDeletePartner(id)
+    }
 
-  },[])
+    const onClickEdit = (data) =>{
+        const { name , address , phone_no , items , quantity , price_per_unit , _id} = data
+        const itemListDetails = []
+        materialList.filter(material =>{
+            if(items.indexOf(material._id) >=0 ){
+                itemListDetails.push ({
+                    "value" : material._id,
+                    "label" : material.name
+                })
+            }
+
+        })
+        const partnerDetails = {
+            name,
+            address,
+            phone_no,
+            items : itemListDetails,
+            quantity,
+            price_per_unit
+        }
+        setPartnerDetails(partnerDetails)
+        setSelectpartnerId(_id)
+        setModal(true)
+
+    }
+
 
     const onClickClose = () =>{
         setModal(false);
@@ -42,14 +70,19 @@ function Partner (props) {
             <AddPartner
                 materialList = { materialList }
                 addPartner = { addPartnerToList }
+                partnerDetails = { partnerDetails}
             />
         )
     }
-
     //adding partner
     const addPartnerToList = (data) =>{
-        dispatch(addPartner(data))
         setModal(false)
+        if (Object.keys(partnerDetails).length > 0){
+            dispatch(updatePartner(data , selectPartnerId ))
+        }else{
+            dispatch(addPartner(data))
+        }
+        dispatch(fetchPartner())
     }
     return (
         <div className="partnerConatner">
@@ -67,8 +100,14 @@ function Partner (props) {
                     partnerList && partnerList.length > 0 && 
                     partnerList.map(partner => {
                         return (
-                            <div>
-                                {partner.name}
+                            <div key ={partner._id} className="partner">
+                                <span>{partner.name}</span>
+                                <span>{partner.address}</span>
+                                <span>{partner.phone_no}</span>
+                                <span>{partner.quantity}</span>
+                                {/* <span>{partner.name}</span> */}
+                                <FontAwesomeIcon onClick={() => onClickEdit (partner)} icon={faPen}  style={{height:"1rem", width:"1rem"}} />
+                                <FontAwesomeIcon onClick={() => onClickDelete(partner._id)} icon={faTrash}  style={{height:"1rem", width:"1rem"}} />
                             </div>
                         )
                     })

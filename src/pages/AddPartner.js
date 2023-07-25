@@ -6,13 +6,15 @@ import Select from 'react-select'
 
 
 function AddPartner (props){
-    const { materialList, addPartner } = props
-    const [ partnerName , setPartnerName ] = useState("")
-    const [ partnerAddress , setPartnerAddress ] = useState("")
-    const [ partnerPhoneNo , setPartnerPhoneNo ] = useState("")
-    const [ selectedItems , setSelectedItems ] = useState([])
-    const [ quantity , setQuantity ] = useState("")
-    const [ price , setPrice ] = useState("")
+    const { materialList, addPartner , partnerDetails } = props
+    const { name , address , phone_no , items , quantity:itemQuantity , price_per_unit} = partnerDetails
+    const [ partnerName , setPartnerName ] = useState("" || name)
+    const [ partnerAddress , setPartnerAddress ] = useState("" || address)
+    const [ partnerPhoneNo , setPartnerPhoneNo ] = useState("" || phone_no)
+    const [ selectedItems , setSelectedItems ] = useState([] || items)
+    const [ quantity , setQuantity ] = useState("" || itemQuantity )
+    const [ price , setPrice ] = useState("" || price_per_unit)
+    const [ isUpdate , setIsUpdate ] = useState(partnerDetails && Object.keys(partnerDetails).length > 0 ? true : false)
 
     const buttonAllignment = {
         alignSelf: "flex-end",
@@ -48,6 +50,12 @@ function AddPartner (props){
         }),
       }
 
+    useEffect(()=>{
+        if(items && items.length > 0 ){
+            handleSelect(items)
+        }
+    },[])
+
     const onChange =(name , event) =>{
         if( name == "partnername"){
             setPartnerName(event.target.value)
@@ -63,6 +71,7 @@ function AddPartner (props){
     }
 
     const handleSelect = data =>{
+
         setSelectedItems([...data])
 
     }
@@ -80,8 +89,8 @@ function AddPartner (props){
                 }
             }),
             quantity: parseInt(quantity),
-            price: parseFloat(price),
-            totalPrice: parseFloat(price)*parseInt(quantity)
+            price_per_unit: parseFloat(price),
+            total_price: parseFloat(price)*parseInt(quantity)
         }
         addPartner(partnerData)
     }

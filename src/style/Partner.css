@@ -16,6 +16,17 @@
     padding: 2rem;
 }
 
+.partner {
+    display: flex;
+    align-items: center;
+    height: 2em;
+    justify-content: space-around;
+    border: 1px solid lightblue;
+    margin: 0.5em;
+    padding: 0.2em;
+    border-radius: 1.5rem;
+}
+
 .addpartnerContainer {
     display: flex;
     flex-direction: column;
@@ -36,6 +47,8 @@
     /* background-color: blue; */
     padding: 1rem;
 }
+
+
 
 
 

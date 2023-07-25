@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchEmployees ,fetchEmployeeDetails , updateEmployeeDetails} from '../action/employeeAction';
 import { fetchMenu , addMenuItem , updateItem, deleteItem } from '../action/menuAction';
 import { fetchMaterialList } from "../action/materialAction"
-import { fetchPartner } from '../action/partnerAction';
+import { fetchPartner , deletePartner } from '../action/partnerAction';
 import "../style/body.css"
 
 function Dashboard(props) {
@@ -72,6 +72,12 @@ function Dashboard(props) {
 
     }
 
+    //delete partner
+    const onClickDeletePartner = (id) =>{
+            dispatch(deletePartner(id))
+            dispatch(fetchPartner())
+    }
+
 
     const onClickEdit = (email) =>{
         dispatch(fetchEmployeeDetails(email))
@@ -129,6 +135,7 @@ function Dashboard(props) {
                         <Partner
                             partnerList={partnerList}
                             materialList={materialList} 
+                            onClickDeletePartner ={ onClickDeletePartner }
 
                         />
                         

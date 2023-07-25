@@ -3,7 +3,9 @@ import {
     FETCH_PARTNER_SUCCESS,
     FETCH_PARTNER_FAILURE,
     ADD_PARTNER_SUCCESS,
-    ADD_PARTNER_FAILURE
+    ADD_PARTNER_FAILURE,
+    DELETE_PARTNER_SUCCESS,
+    DELETE_PARTNER_FAILURE,
 } from "../action/actionTypes"
 
 
@@ -43,6 +45,18 @@ const partnerReducer = ( state = intitialState , action) => {
                 ...state,
                 errorMessage: action.payload,
             } 
+        case DELETE_PARTNER_SUCCESS:
+            return {
+                ...state,
+                loading:false,
+                partners: state.partners.filter(item => item._id != action.payload._id)
+            }
+        case DELETE_PARTNER_FAILURE:
+            return {
+                ...state,
+                loading:false,
+                errorMessage: action.payload
+            }        
         default:
             return {
                 ...state
